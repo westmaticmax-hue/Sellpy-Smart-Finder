@@ -1,357 +1,224 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f6f6f2">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sellpy Smart Finder</title>
 
 <style>
-:root {
-  --bg:#f6f6f2;
-  --card:#fff;
-  --ink:#20221f;
-  --muted:#777b73;
-  --line:#e5e6df;
-  --green:#315c46;
-  --pale:#e7eee8;
-}
-
-* {
-  box-sizing:border-box;
-}
-
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    margin: 0;
+    background: #0b1423;
+    color: #f5f7fb;
+    font-family: Arial, sans-serif;
 }
 
 .wrap {
-  max-width:900px;
-  margin:auto;
-  padding:18px;
+    max-width: 900px;
+    margin: auto;
+    padding: 22px 16px;
 }
 
-.top {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 0 22px;
-}
-
-.brand {
-  font-size:20px;
-  font-weight:850;
-}
-
-.brand span {
-  color:var(--green);
-}
-
-.tag {
-  font-size:12px;
-  color:var(--muted);
+.card {
+    background: #15243a;
+    border: 1px solid #30435e;
+    border-radius: 16px;
+    padding: 18px;
+    margin: 14px 0;
 }
 
 h1 {
-  font-size:clamp(30px,7vw,46px);
-  line-height:1;
-  letter-spacing:-1.8px;
-  margin:10px 0;
+    font-size: 36px;
 }
 
-.intro {
-  color:var(--muted);
-  line-height:1.5;
-  margin:10px 0 22px;
-}
-
-.panel {
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:18px;
-  margin:14px 0;
-  box-shadow:0 5px 20px #20221f08;
+p {
+    color: #aebdd0;
+    line-height: 1.5;
 }
 
 .grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
 .field label {
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  margin:0 0 6px;
-  color:#565b54;
+    display: block;
+    color: #aebdd0;
+    font-size: 13px;
+    margin-bottom: 5px;
 }
 
 .field input,
 .field select {
-  width:100%;
-  padding:12px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:white;
-  font:inherit;
-  min-width:0;
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #30435e;
+    background: #0c1728;
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 .actions {
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  margin-top:15px;
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }
 
-button {
-  border:0;
-  border-radius:13px;
-  padding:12px 16px;
-  font:inherit;
-  font-weight:700;
-  cursor:pointer;
+button, .file {
+    padding: 13px 15px;
+    border: 1px solid #405879;
+    border-radius: 10px;
+    background: #263b58;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .primary {
-  background:var(--green);
-  color:white;
-}
-
-.light {
-  background:var(--pale);
-  color:var(--green);
-}
-
-.plain {
-  background:#f1f1ed;
-  color:#444;
-}
-
-.note {
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.5;
+    background: #80baff;
+    color: #071426;
+    border: 0;
 }
 
 .status {
-  padding:12px;
-  border-radius:12px;
-  background:#f3f4ef;
-  font-size:13px;
-  color:#555;
-  margin-top:12px;
+    padding: 11px;
+    background: #0c1728;
+    border-radius: 9px;
+    color: #aebdd0;
+    margin-top: 12px;
 }
 
-.results-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.results-head h2 {
-  font-size:20px;
-  margin:0;
-}
-
-.count {
-  font-size:12px;
-  color:var(--muted);
-}
-
-.cards {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:14px;
+.warning {
+    background: #302819;
+    border-left: 3px solid #ffd27a;
+    padding: 12px;
+    border-radius: 8px;
+    color: #ffe5b5;
+    font-size: 13px;
 }
 
 .item {
-  background:white;
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:14px;
-  min-width:0;
-}
-
-.rank {
-  font-size:11px;
-  color:var(--green);
-  font-weight:800;
+    padding: 14px;
+    background: #0d1a2c;
+    border: 1px solid #30435e;
+    border-radius: 12px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .item h3 {
-  font-size:16px;
-  margin:7px 0;
+    margin: 0 0 5px;
 }
 
-.prices {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin:12px 0;
-}
-
-.pricebox {
-  background:#f5f6f2;
-  padding:9px;
-  border-radius:10px;
-}
-
-.pricebox small {
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-}
-
-.pricebox b {
-  font-size:15px;
+.muted {
+    color: #aebdd0;
+    font-size: 13px;
 }
 
 .score {
-  font-size:25px;
-  font-weight:850;
-  color:var(--green);
+    color: #62d6a5;
+    font-weight: bold;
 }
 
-.bar {
-  height:6px;
-  background:#e9ebe5;
-  border-radius:8px;
-  overflow:hidden;
-  margin:5px 0 10px;
+.price {
+    font-size: 21px;
+    font-weight: bold;
+    white-space: nowrap;
 }
 
-.bar i {
-  display:block;
-  height:100%;
-  background:var(--green);
+.pill {
+    display: inline-block;
+    background: #203550;
+    padding: 7px 10px;
+    border-radius: 20px;
+    margin: 4px;
+    color: #c2d0df;
+    font-size: 12px;
 }
 
-.item p {
-  font-size:12px;
-  line-height:1.45;
-  color:#656a62;
+a {
+    color: #80baff;
 }
 
-.item a {
-  display:inline-block;
-  color:var(--green);
-  font-weight:700;
-  font-size:13px;
-  margin-top:5px;
-}
+@media(max-width:600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 
-.empty {
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed #d4d7ce;
-  border-radius:16px;
-  grid-column:1/-1;
-}
-
-.footer {
-  padding:20px 4px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.5;
-}
-
-@media(max-width:560px) {
-  .grid,.cards {
-    grid-template-columns:1fr;
-  }
-
-  .wrap {
-    padding:14px;
-  }
-
-  .panel {
-    padding:15px;
-  }
+    .item {
+        display: block;
+    }
 }
 </style>
 </head>
 
 <body>
+
 <main class="wrap">
 
-<header class="top">
-  <div class="brand">
-    SELLPY <span>SMART FINDER</span>
-  </div>
-  <div class="tag">MOST BANG FOR THE BUCK</div>
-</header>
-
-<h1>Hitta de smartaste köpen.</h1>
-
-<p class="intro">
-Välj vad du letar efter. Smart Finder sorterar annonser
-efter prisvärde – inte bara efter känt varumärke.
+<p style="color:#80baff;font-weight:bold">
+PERSONLIG FYNDSÖKNING
 </p>
 
-<section class="panel">
+<h1>Sellpy Smart Finder</h1>
 
-<h2 style="font-size:19px;margin:0 0 14px">
-1. Dina filter
-</h2>
+<p>
+Hitta de bästa köpen – inte bara de största rabatterna.
+Välj kategori, storlek, skick och maxpris.
+Rangordna annonser efter Sellpy-pris jämfört med uppskattat begagnatvärde.
+</p>
+
+<section class="card">
+
+<h2>1. Vad letar du efter?</h2>
 
 <div class="grid">
 
 <div class="field">
 <label>Avdelning</label>
-<select id="dept">
-<option value="">Alla</option>
-<option>Dam</option>
-<option>Herr</option>
+<select id="segment">
+<option>Man</option>
+<option>Kvinna</option>
 <option>Barn</option>
 </select>
 </div>
 
 <div class="field">
-<label>Kategori</label>
-<select id="cat">
-<option value="">Alla kategorier</option>
-<option>Jackor</option>
-<option>Skor</option>
-<option>Tröjor</option>
-<option>Byxor</option>
-<option>Klänningar</option>
-<option>Väskor</option>
-<option>Sport & friluftsliv</option>
-<option>Övrigt</option>
+<label>Produkt / kategori</label>
+<input id="category" value="Jacka">
+</div>
+
+<div class="field">
+<label>Skick</label>
+<select id="condition">
+<option>Nyskick</option>
+<option>Mycket bra skick</option>
+<option>Bra skick</option>
+<option>Alla skick</option>
 </select>
 </div>
 
 <div class="field">
 <label>Storlek</label>
-<input id="size" placeholder="Ex. M, 38, 42">
+<input id="size" value="L">
 </div>
 
 <div class="field">
-<label>Varumärke (frivilligt)</label>
-<input id="brand" placeholder="Lämna tomt för alla">
+<label>Maxpris (kr)</label>
+<input id="maxPrice" type="number" value="1000">
 </div>
 
 <div class="field">
-<label>Maxpris på Sellpy (kr)</label>
-<input id="max" type="number" min="0" placeholder="Ex. 500">
-</div>
-
-<div class="field">
-<label>Skick minst</label>
-<select id="condition">
-<option value="">Alla skick</option>
-<option value="Nyskick">Nyskick</option>
-<option value="Mycket gott">Mycket gott</option>
-<option value="Gott">Gott</option>
+<label>Antal matchningar</label>
+<select id="count">
+<option>10</option>
+<option selected>20</option>
 </select>
 </div>
 
@@ -359,361 +226,286 @@ efter prisvärde – inte bara efter känt varumärke.
 
 <div class="actions">
 
-<button class="primary" onclick="openSellpy()">
-Sök på Sellpy ↗
+<button class="primary" id="search">
+Öppna sökning på Sellpy ↗
 </button>
 
-<button class="light" onclick="document.getElementById('csv').click()">
-Läs in produktlista (CSV)
-</button>
-
-<button class="plain" onclick="template()">
+<button id="template">
 Hämta CSV-mall
 </button>
 
-<input
-id="csv"
-type="file"
-accept=".csv,text/csv"
-hidden
-onchange="loadCSV(event)"
->
+<label class="file" for="file">
+Importera annonsdata
+</label>
+
+<input id="file" type="file" accept=".csv" hidden>
 
 </div>
 
 <div class="status" id="status">
-Börja med dina filter. För att rangordna riktiga annonser
-behöver du läsa in en produktlista med pris- och jämförelsedata.
-</div>
-
-<p class="note">
-”Sök på Sellpy” öppnar Sellpys webbplats med dina valda sökord.
-Den här fristående HTML-sidan hämtar inte automatiskt annonser från Sellpy.
-</p>
-
-</section>
-
-<section class="panel">
-
-<div class="results-head">
-<h2>2. Bästa fynden</h2>
-<span class="count" id="count">0 produkter</span>
-</div>
-
-<div id="cards" class="cards">
-<div class="empty">
-Inga produkter inlästa ännu.<br>
-Du kan prova exempeldata eller läsa in en CSV-fil.
-</div>
-</div>
-
-<div class="actions">
-
-<button class="light" onclick="demo()">
-Visa exempel
-</button>
-
-<button class="plain" onclick="exportCSV()">
-Exportera topplista
-</button>
-
+Öppna Sellpy-sökningen och importera sedan annonsdata i CSV-format.
 </div>
 
 </section>
 
-<section class="panel">
+<section class="card">
 
-<h2 style="font-size:17px;margin:0 0 8px">
-Så räknas fyndpoängen
-</h2>
+<h2>2. Dina bästa fynd</h2>
 
-<p class="note">
-Poängen väger samman Sellpy-pris jämfört med uppskattat
-andrahandsvärde, skick och hur komplett prisunderlaget är.
-Ett högt nypris räcker inte i sig. Saknas jämförbart
-andrahandsvärde visas produkten som ej värderad i stället
-för att hitta på ett värde.
-</p>
+<div class="warning">
+Detta är första versionen. Den hämtar ännu inte annonser automatiskt
+och gör ingen extern AI-prissökning. Den rangordnar importerade uppgifter.
+För att undvika påhittade värden måste varje annons ha ett begagnatvärde
+i CSV-filen.
+</div>
 
-<p class="note">
-<b>Viktigt:</b> Detta är första HTML-versionen.
-Automatisk AI-värdering och hämtning av avslutade försäljningar
-kräver en separat server/datakälla. Lägg aldrig privata
-API-nycklar i denna HTML-fil.
-</p>
+<div id="stats"></div>
+
+<div id="results">
+<p class="muted">Inga annonser inlästa ännu.</p>
+</div>
 
 </section>
 
-<footer class="footer">
-Sellpy Smart Finder · Privat hjälpmedel för att hitta bra köp.
-Exempeldata är påhittad och endast till demonstration.
-</footer>
+<section class="card">
+
+<h2>CSV-kolumner</h2>
+
+<p class="muted">
+title, brand, size, condition, price, new_price,
+secondhand_value, url, source
+</p>
+
+<p class="muted">
+secondhand_value ska vara ett uppskattat marknadsvärde
+för motsvarande vara i liknande skick.
+Lägg gärna en länk till underlaget i source.
+</p>
+
+</section>
 
 </main>
 
 <script>
 
-let products=[];
+const $ = id => document.getElementById(id);
 
-const $=id=>document.getElementById(id);
+let data = [];
 
-function openSellpy(){
+function csv(t) {
 
-let q=[
-$('dept').value,
-$('cat').value,
-$('size').value,
-$('brand').value
-].filter(Boolean).join(' ');
+    let rows = [], r = [], v = '', q = false;
 
-window.open(
-'https://www.sellpy.se/search?q='+encodeURIComponent(q),
-'_blank'
-);
+    for (let i = 0; i < t.length; i++) {
+
+        let c = t[i], n = t[i+1];
+
+        if (c == '"' && q && n == '"') {
+            v += '"';
+            i++;
+        }
+        else if (c == '"') {
+            q = !q;
+        }
+        else if (c == ',' && !q) {
+            r.push(v);
+            v = '';
+        }
+        else if ((c == '\n' || c == '\r') && !q) {
+
+            if (c == '\r' && n == '\n') i++;
+
+            r.push(v);
+
+            if (r.some(x => x.trim())) rows.push(r);
+
+            r = [];
+            v = '';
+        }
+        else {
+            v += c;
+        }
+    }
+
+    r.push(v);
+
+    if (r.some(x => x.trim())) rows.push(r);
+
+    let h = (rows.shift() || []).map(x => x.trim().toLowerCase());
+
+    return rows.map(row =>
+        Object.fromEntries(
+            h.map((k,i) => [k, (row[i] || '').trim()])
+        )
+    );
+}
+
+function esc(s) {
+
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[c]));
 
 }
 
-function score(p){
+function points(x) {
 
-if(!(Number(p.sellpy_price)>0&&Number(p.market_value)>0))
-return null;
+    let p = +x.price;
+    let v = +x.secondhand_value;
+    let n = +x.new_price;
 
-let ratio=Number(p.market_value)/Number(p.sellpy_price);
+    if (!(p > 0 && v > 0)) return null;
 
-let value=Math.max(0,Math.min(75,(ratio-1)*42));
+    let d = Math.max(0, Math.min(1, (v-p)/v));
 
-let cond={
-'Nyskick':15,
-'Mycket gott':12,
-'Gott':8,
-'Slitet':3
-}[p.condition]||5;
+    let c = (x.condition || '').toLowerCase();
 
-let confidence=p.source?10:0;
+    let cq = c.includes('ny') ? 1 :
+             c.includes('mycket') ? .92 :
+             c.includes('bra') ? .82 : .72;
 
-return Math.round(Math.min(100,value+cond+confidence));
+    let e = x.source ? 1 : .75;
+
+    let ret = n > 0 ?
+        Math.max(0, Math.min(1, (n-p)/n)) : .5;
+
+    return Math.round(
+        (d*.65 + cq*.2 + e*.1 + ret*.05)*100
+    );
+}
+
+function render() {
+
+    let cat = $('category').value.toLowerCase().trim();
+    let sz = $('size').value.toLowerCase().trim();
+    let max = +$('maxPrice').value || Infinity;
+
+    let a = data.filter(x =>
+        (!cat || (`${x.title || ''} ${x.category || ''}`)
+            .toLowerCase().includes(cat)) &&
+        (!sz || String(x.size || '').toLowerCase() === sz) &&
+        (+x.price) <= max
+    )
+    .map(x => ({...x, s: points(x)}))
+    .filter(x => x.s !== null)
+    .sort((a,b) => b.s-a.s)
+    .slice(0, +$('count').value);
+
+    $('stats').innerHTML =
+        `<span class="pill">${data.length} importerade</span>
+         <span class="pill">${a.length} värderingsbara</span>`;
+
+    if (!a.length) {
+        $('results').innerHTML =
+            '<p class="muted">Inga värderingsbara träffar. CSV måste innehålla price och secondhand_value.</p>';
+        return;
+    }
+
+    $('results').innerHTML = a.map((x,i) => `
+
+        <article class="item">
+
+            <div>
+
+                <h3>${i+1}. ${esc(x.title || 'Produkt utan namn')}</h3>
+
+                <div class="muted">
+                    ${esc(x.brand || 'Okänt märke')}
+                    · Storlek ${esc(x.size || '–')}
+                    · ${esc(x.condition || 'Skick saknas')}
+                </div>
+
+                <p class="muted">
+                    Begagnatvärde:
+                    ${(+x.secondhand_value).toLocaleString('sv-SE')} kr
+                    · Nypris:
+                    ${+x.new_price > 0 ?
+                        (+x.new_price).toLocaleString('sv-SE')+' kr' :
+                        'Ej angivet'}
+                </p>
+
+                <div class="score">
+                    Fyndpoäng ${x.s}/100
+                </div>
+
+                <p class="muted">
+                    ${x.source ?
+                        'Källa angiven.' :
+                        'Ingen källa angiven – lägre säkerhet.'}
+                </p>
+
+                ${x.source ?
+                    `<a href="${esc(x.source)}" target="_blank">Värderingsunderlag ↗</a>` : ''}
+
+                ${x.url ?
+                    `<a href="${esc(x.url)}" target="_blank">Sellpy-annons ↗</a>` : ''}
+
+            </div>
+
+            <div class="price">
+                ${(+x.price).toLocaleString('sv-SE')} kr
+            </div>
+
+        </article>
+
+    `).join('');
 
 }
 
-function filtered(){
+$('file').onchange = async e => {
 
-return products.filter(p=>
-(!$('dept').value||!p.department||p.department.toLowerCase()===$('dept').value.toLowerCase())&&
-(!$('cat').value||!p.category||p.category.toLowerCase()===$('cat').value.toLowerCase())&&
-(!$('size').value||!p.size||p.size.toLowerCase()===$('size').value.toLowerCase())&&
-(!$('brand').value||!p.brand||p.brand.toLowerCase().includes($('brand').value.toLowerCase()))&&
-(!$('max').value||Number(p.sellpy_price)<=Number($('max').value))
-);
+    if (e.target.files[0]) {
 
-}
+        data = csv(await e.target.files[0].text());
 
-function render(){
+        render();
 
-let arr=filtered()
-.map(p=>({...p,score:score(p)}))
-.sort((a,b)=>(b.score??-1)-(a.score??-1))
-.slice(0,10);
+        $('status').textContent =
+            `Importerade ${data.length} rader.`;
 
-$('count').textContent=arr.length+' produkter';
+    }
 
-$('cards').innerHTML=arr.length?arr.map((p,i)=>
-'<article class="item">'+
-'<div class="rank">#'+(i+1)+' · '+(p.score===null?'EJ VÄRDERAD':'FYNDPOÄNG')+'</div>'+
-'<h3>'+esc(p.title||'Produkt')+'</h3>'+
-'<div class="note">'+esc([p.brand,p.size,p.condition].filter(Boolean).join(' · '))+'</div>'+
-'<div class="prices">'+
-'<div class="pricebox"><small>Sellpy-pris</small><b>'+money(p.sellpy_price)+'</b></div>'+
-'<div class="pricebox"><small>Andrahandsvärde</small><b>'+money(p.market_value)+'</b></div>'+
-'</div>'+
-(p.score===null?
-'<p>Jämförbart andrahandsvärde saknas. Ingen fyndpoäng sätts.</p>':
-'<div class="score">'+p.score+'/100</div>'+
-'<div class="bar"><i style="width:'+p.score+'%"></i></div>'+
-'<p>Beräknat värdeövertag: '+money(Number(p.market_value)-Number(p.sellpy_price))+'. Underlag: '+esc(p.source||'Ej angiven')+'</p>'
-)+
-(p.url?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener">Öppna annons ↗</a>':'')+
-'</article>'
-).join(''):
-'<div class="empty">Inga produkter matchar filtren.</div>';
-
-}
-
-function money(v){
-
-return Number(v)>0?
-Number(v).toLocaleString('sv-SE')+' kr':'–';
-
-}
-
-function esc(s){
-
-return String(s??'').replace(/[&<>"']/g,c=>({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#39;'
-}[c]));
-
-}
-
-function parseCSV(t){
-
-let lines=t.replace(/^\uFEFF/,'').trim().split(/\r?\n/);
-
-let sep=lines[0].includes(';')?';':',';
-
-let headers=lines.shift().split(sep).map(x=>x.trim().toLowerCase());
-
-return lines.map(line=>{
-
-let vals=line.split(sep);
-let o={};
-
-headers.forEach((h,i)=>o[h]=(vals[i]||'').trim());
-
-return {
-title:o.title||o.namn,
-department:o.department||o.avdelning,
-category:o.category||o.kategori,
-size:o.size||o.storlek,
-brand:o.brand||o.varumarke,
-condition:o.condition||o.skick,
-sellpy_price:Number((o.sellpy_price||o.sellpypris||'').replace(',','.')),
-market_value:Number((o.market_value||o.andrahandsvarde||'').replace(',','.')),
-source:o.source||o.kalla,
-url:o.url||o.lank
 };
 
-}).filter(p=>p.title);
+['segment','category','condition','size','maxPrice','count']
+.forEach(id => $(id).addEventListener('input', render));
 
-}
+$('search').onclick = () => {
 
-function loadCSV(e){
+    window.open(
+        'https://www.sellpy.se/search?query=' +
+        encodeURIComponent($('category').value),
+        '_blank'
+    );
 
-let f=e.target.files[0];
-
-if(!f)return;
-
-let r=new FileReader();
-
-r.onload=()=>{
-
-products=parseCSV(r.result);
-
-$('status').textContent=
-products.length+' rader lästes in. Produkter med jämförelsevärde kan rangordnas.';
-
-render();
+    $('status').textContent =
+        'Sellpy öppnas. Kontrollera avdelning, storlek, skick och pris där.';
 
 };
 
-r.readAsText(f,'UTF-8');
+$('template').onclick = () => {
 
-}
+    let s =
+        'title,brand,size,condition,price,new_price,secondhand_value,url,source\n' +
+        'Exempeljacka,Exempelmärke,L,Nyskick,350,2500,1400,https://www.sellpy.se/item/EXEMPEL,\n';
 
-function template(){
+    let a = document.createElement('a');
 
-let csv=
-'title,department,category,size,brand,condition,sellpy_price,market_value,source,url\n'+
-'Exempeljacka,Dam,Jackor,M,Exempel,Nyskick,250,700,Avslutade jämförbara försäljningar,https://www.sellpy.se/';
+    a.href = URL.createObjectURL(
+        new Blob([s], {type:'text/csv;charset=utf-8'})
+    );
 
-download('sellpy-mall.csv',csv);
+    a.download = 'sellpy-smart-finder-mall.csv';
 
-}
+    a.click();
 
-function demo(){
+    URL.revokeObjectURL(a.href);
 
-products=[
-
-{
-title:'Ullkappa – exempel',
-department:'Dam',
-category:'Jackor',
-size:'M',
-brand:'Exempel',
-condition:'Mycket gott',
-sellpy_price:320,
-market_value:950,
-source:'Fiktivt demoexempel'
-},
-
-{
-title:'Läderskor – exempel',
-department:'Herr',
-category:'Skor',
-size:'42',
-brand:'Exempel',
-condition:'Nyskick',
-sellpy_price:180,
-market_value:520,
-source:'Fiktivt demoexempel'
-},
-
-{
-title:'Tröja – saknar jämförelse',
-department:'Dam',
-category:'Tröjor',
-size:'M',
-brand:'Okänt',
-condition:'Gott',
-sellpy_price:90,
-market_value:0,
-source:''
-}
-
-];
-
-$('status').textContent=
-'Exempeldata visas. Dessa priser är påhittade – inte riktiga Sellpy-annonser.';
-
-render();
-
-}
-
-function exportCSV(){
-
-let arr=filtered()
-.map(p=>({...p,score:score(p)}))
-.sort((a,b)=>(b.score??-1)-(a.score??-1))
-.slice(0,10);
-
-let rows=[
-['title','sellpy_price','market_value','score','source','url'],
-...arr.map(p=>[
-p.title,
-p.sellpy_price,
-p.market_value,
-p.score??'',
-p.source,
-p.url
-])
-];
-
-download(
-'sellpy-topplista.csv',
-rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')).join('\n')
-);
-
-}
-
-function download(name,data){
-
-let a=document.createElement('a');
-
-a.href=URL.createObjectURL(
-new Blob([data],{type:'text/csv;charset=utf-8'})
-);
-
-a.download=name;
-a.click();
-
-URL.revokeObjectURL(a.href);
-
-}
-
-['dept','cat','size','brand','max','condition']
-.forEach(id=>$(id).addEventListener('input',render));
+};
 
 </script>
 
